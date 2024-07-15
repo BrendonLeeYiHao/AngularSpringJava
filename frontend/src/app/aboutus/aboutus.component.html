@@ -1,0 +1,99 @@
+<div style="padding:40px 0px">
+    <nz-table #basicTable [nzPageSize]="10" [nzScroll]="{ y: '800px' }" [nzData]="userList">
+        <thead>
+            <tr>
+            <th nzWidth="80px">{{ 'id' | translate }}</th>
+            <th nzWidth="200px">{{ 'name' | translate }}</th>
+            <th nzWidth="200px">{{ 'password' | translate }}</th>
+            <th nzWidth="200px">{{ 'email' | translate }}</th>
+            <th nzWidth="150px">{{ 'date_of_birth' | translate }}</th>
+            <th nzWidth="100px">{{ 'gender' | translate }}</th>
+            <th nzWidth="150px">{{ 'action' | translate }}</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let user of basicTable.data">
+            <td>{{ user.id }}</td>
+            <td>{{ user.name }}</td>
+            <td>{{ user.password }}</td>
+            <td>{{ user.email }}</td>
+            <td>{{ user.dob | date: 'yyyy-MM-dd' }}</td>
+            <td>{{ user.gender }}</td>
+            <td>
+                <button nz-button nzType="primary" style="background-color:rgb(60, 230, 60);border-radius: 10px;" (click)="openUpdateModal(user)">{{ 'update' | translate }}</button>
+                <button nz-button nzType="primary" style="margin-left:10px;background-color:rgb(245, 43, 83);border-radius: 10px;" (click)="openDeleteModal(user.id)">{{ 'delete' | translate }}</button>
+            </td>
+            </tr>
+        </tbody>
+    </nz-table>
+</div>
+
+<nz-modal [(nzVisible)]="isVisible" nzTitle="{{ 'update_user' | translate }}" (nzOnCancel)="handleCancel()" [nzFooter]="modalFooter">
+    <ng-container *nzModalContent>
+      <h2 style="text-align:center;margin-top:20px;font-style: italic;font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif">{{ 'existing_user' | translate }}</h2>
+        <div style="padding:20px 0px">
+            <form nz-form [formGroup]="updatedForm" style="margin:auto;">
+                <nz-form-item>
+                  <nz-form-label nzRequired [nzMd]="6" [nzSm]="24">{{ 'id' | translate }}</nz-form-label>
+                  <nz-form-control>
+                      <input nz-input formControlName="id" readonly>
+                  </nz-form-control>
+                </nz-form-item>
+                <br>
+                <nz-form-item>
+                    <nz-form-label nzRequired [nzMd]="6" [nzSm]="24">{{ 'name' | translate }}</nz-form-label>
+                    <nz-form-control>
+                        <input nz-input formControlName="name" readonly>
+                    </nz-form-control>
+                </nz-form-item>
+                <br>
+                <nz-form-item>
+                    <nz-form-label nzRequired [nzMd]="6" [nzSm]="24">{{ 'password' | translate }}</nz-form-label>
+                    <nz-form-control nzHasFeedback [nzErrorTip]="passwordErrorTpl">
+                        <nz-input-group [nzSuffix]="suffixTemplate">
+                            <input [type]="passwordVisible ? 'text': 'password'" nz-input formControlName="password" placeholder="Aab@cd12">
+                        </nz-input-group>
+                        <ng-template #suffixTemplate>
+                            <span nz-icon [nzType]="passwordVisible ? 'eye-invisible' : 'eye'" (click)="passwordVisible = !passwordVisible"></span>
+                        </ng-template>
+                        <ng-template #passwordErrorTpl let-control>
+                            <ng-container *ngIf="control.hasError('required')">{{ 'password_required_msg' | translate }}</ng-container>
+                        </ng-template>
+                    </nz-form-control>
+                </nz-form-item>
+                <br>
+                <nz-form-item>
+                    <nz-form-label nzRequired [nzMd]="6" [nzSm]="24">{{ 'email' | translate }}</nz-form-label>
+                    <nz-form-control nzHasFeedback [nzErrorTip]="emailErrorTpl">
+                        <input nz-input formControlName="email" placeholder="examplelee@gmail.com">
+                        <ng-template #emailErrorTpl let-control>
+                            <ng-container *ngIf="control.hasError('required')">{{ 'email_required_msg' | translate }}</ng-container>
+                            <ng-container *ngIf="control.hasError('email') && !control.hasError('required')">
+                              {{ 'email_invalid_msg' | translate }}
+                            </ng-container>
+                          </ng-template>
+                    </nz-form-control>
+                </nz-form-item>
+                <br>
+                <nz-form-item>
+                    <nz-form-label nzRequired [nzMd]="6" [nzSm]="24">{{ 'date_of_birth' | translate }}</nz-form-label>
+                    <nz-form-control>
+                        <input nz-input formControlName="dob" readonly>
+                    </nz-form-control>
+                </nz-form-item>
+                <br>
+                <nz-form-item>
+                    <nz-form-label nzRequired [nzMd]="6" [nzSm]="24">{{ 'gender' | translate }}</nz-form-label>
+                    <nz-form-control>
+                          <input nz-input formControlName="gender" readonly>
+                    </nz-form-control>
+                </nz-form-item>
+            </form>
+        </div>
+    </ng-container>
+
+    <ng-template #modalFooter>
+        <button nz-button nzType="default" (click)="handleCancel()">{{ 'cancel' | translate }}</button>
+        <button nz-button nzType="primary" (click)="handleOk()">{{ 'ok' | translate }}</button>
+    </ng-template>
+  </nz-modal>

@@ -1,0 +1,80 @@
+<div style="margin:auto; max-width:800px">
+    <h1 style="text-align:center;margin-top:40px;font-weight:bold;font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif; padding:0px 20px">
+        {{ 'registration' | translate }}
+    </h1>
+    <div style="padding:40px 20px">
+        <!-- <div nz-row nzAlign="middle">
+            <div nz-col nzSpan="22">
+              <input nz-input [(ngModel)]="searchInput" placeholder="Enter id to search ...">
+            </div>
+            <div nz-col nzSpan="2">
+              <button nz-button nzType="primary" style="float:right" (click)="searchById()">{{ 'search' | translate }}</button>
+            </div>
+        </div> -->
+          <!-- <br> -->
+    <form nz-form [formGroup]="registerForm" (ngSubmit)="register()" style="margin:auto;">
+        <nz-form-item>
+            <nz-form-label nzRequired [nzMd]="4" [nzSm]="24">{{ 'name' | translate }}</nz-form-label>
+            <nz-form-control nzHasFeedback [nzErrorTip]="nameErrorTpl">
+                <input nz-input formControlName="name" placeholder="Vincent Lim">
+                <ng-template #nameErrorTpl let-control>
+                    <ng-container *ngIf="control.hasError('required')">{{ 'name_required_msg' | translate }}</ng-container>
+                    <ng-container *ngIf="control.hasError('pattern')">
+                        <div [innerHTML]="'name_invalid_pattern_msg' | translate"></div>
+                    </ng-container>
+                </ng-template>
+            </nz-form-control>
+        </nz-form-item>
+        <br>
+        <nz-form-item>
+            <nz-form-label nzRequired [nzMd]="4" [nzSm]="24">{{ 'password' | translate }}</nz-form-label>
+            <nz-form-control nzHasFeedback [nzErrorTip]="passwordErrorTpl">
+                <nz-input-group [nzSuffix]="suffixTemplate">
+                    <input [type]="passwordVisible ? 'text': 'password'" nz-input formControlName="password" placeholder="Aab@cd12">
+                </nz-input-group>
+                <ng-template #suffixTemplate>
+                    <span nz-icon [nzType]="passwordVisible ? 'eye-invisible' : 'eye'" (click)="passwordVisible = !passwordVisible"></span>
+                </ng-template>
+                <ng-template #passwordErrorTpl let-control>
+                    <ng-container *ngIf="control.hasError('required')">{{ 'password_required_msg' | translate }}</ng-container>
+                </ng-template>
+            </nz-form-control>
+        </nz-form-item>
+        <br>
+        <nz-form-item>
+            <nz-form-label nzRequired [nzMd]="4" [nzSm]="24">{{ 'email' | translate }}</nz-form-label>
+            <nz-form-control nzHasFeedback [nzErrorTip]="emailErrorTpl">
+                <input nz-input formControlName="email" placeholder="vincentlim@gmail.com">
+                <ng-template #emailErrorTpl let-control>
+                    <ng-container *ngIf="control.hasError('required')">{{ 'email_required_msg' | translate }}</ng-container>
+                    <ng-container *ngIf="control.hasError('email') && !control.hasError('required')">
+                        {{ 'email_invalid_msg' | translate }}
+                    </ng-container>
+                </ng-template>
+            </nz-form-control>
+        </nz-form-item>
+        <br>
+        <nz-form-item>
+            <nz-form-label nzRequired [nzMd]="4" [nzSm]="24">{{ 'date_of_birth' | translate }}</nz-form-label>
+            <nz-form-control nzHasFeedback nzErrorTip="{{ 'dob_required_msg' | translate }}">
+                <nz-date-picker formControlName="dob" style="width:100%" [nzDisabledDate]="disabledDate" [nzDefaultPickerValue]="showDate" ></nz-date-picker>
+            </nz-form-control>
+        </nz-form-item>
+        <br>
+        <nz-form-item>
+            <nz-form-label nzRequired [nzMd]="4" [nzSm]="24">{{ 'gender' | translate }}</nz-form-label>
+            <nz-form-control nzHasFeedback nzErrorTip="{{ 'gender_required_msg' | translate }}">
+                <nz-select formControlName="gender" nzPlaceHolder="Male">
+                    <nz-option nzLabel="Male" nzValue="Male"></nz-option>
+                    <nz-option nzLabel="Female" nzValue="Female"></nz-option>
+                </nz-select>
+            </nz-form-control>
+        </nz-form-item>
+        <nz-form-item nz-row class="register-area" >
+            <nz-form-control>
+                <button nz-button nzType="primary" style="float:right" >{{ 'register' | translate }}</button>
+            </nz-form-control>
+        </nz-form-item>
+    </form>
+</div>
+</div>

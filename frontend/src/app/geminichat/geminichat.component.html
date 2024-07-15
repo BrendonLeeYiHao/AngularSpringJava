@@ -1,0 +1,15 @@
+<div style="padding:40px 0px">
+    <h1>{{ 'gemini_chatbot' | translate }} - {{ 'ask_whatever_u_want' | translate }}</h1>
+
+    <div *ngFor="let item of chatHistory" style="font-size: 20px; font-family: 'Times New Roman', Times, serif;">
+        <p *ngIf="item.from === 'user'" style="text-align: right; background-color: beige; border: 3px black; border-radius: 15px; padding:10px">{{ item.message }}</p>
+        <p *ngIf="item.from === 'bot'" style="text-align: left; background-color: rgb(254, 254, 168); border: 3px black; border-radius: 15px; padding: 10px" [innerHTML]="formatText(item.message)"></p>
+    </div>
+    <br><br>
+    <div>
+        <input nz-input [(ngModel)]="prompt" (keyup.enter)="sendData()"><br><br>
+        <button nz-button nzType="primary" style="float: right;" (click)="sendData()">{{ 'send' | translate}}</button>
+    </div>
+</div>
+
+

@@ -1,0 +1,11 @@
+<a routerLink="/home" routerLinkActive="active" style="font-size: 20px;">{{ 'home' | translate }}</a>&nbsp;&nbsp;&nbsp;&nbsp;
+<a routerLink="/about-us" routerLinkActive="active" style="font-size: 20px;">{{ 'user' | translate }}</a>&nbsp;&nbsp;&nbsp;&nbsp;
+<a routerLink="/gemini" routerLinkActive="active" style="font-size: 20px;">{{ 'gemini_chatbot' | translate }}</a>
+
+<div style="float:right">
+    <button nz-button nzType="primary" (click)="switchLanguage('en')">English</button>&nbsp;
+    <button nz-button nzType="primary" (click)="switchLanguage('zh')">中文</button>&nbsp;
+    <button nz-button nzType="primary" (click)="switchLanguage('ms_MY')">Bahasa Melayu</button>
+</div>
+
+<router-outlet></router-outlet>
