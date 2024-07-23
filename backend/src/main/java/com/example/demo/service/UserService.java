@@ -11,4 +11,5 @@ public interface UserService {
     public String updateProfile(User user);
     public String deleteUser(Integer id);
     public List<User> getAllUser();
+    public String login(User user);
 }

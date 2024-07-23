@@ -87,7 +87,7 @@ public class UserControllerTest {
     public void testDeleteProfile() throws Exception {
 
         // Given
-        int userId = 194;
+        int userId = 215;
 
         // When
         MvcResult result = mockMvc.perform(MockMvcRequestBuilders.delete("/user/delete/{id}", userId)

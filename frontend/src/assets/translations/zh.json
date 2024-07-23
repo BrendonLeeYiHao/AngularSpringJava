@@ -30,6 +30,11 @@
     "update_user": "更新用户",
     "existing_user": "现有用户",
     "cancel": "取消",
-    "ok": "确定"
+    "ok": "确定",
+    "language": "语言",
+    "login": "登录",
+    "log_in": "登录",
+    "or": "或者",
+    "register_now": "立即注册！"
 }
   

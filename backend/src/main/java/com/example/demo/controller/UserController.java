@@ -26,7 +26,6 @@ public class UserController {
         String response = userService.createUser(user);
         responseMap.put("message", response);
         return ResponseEntity.ok().body(responseMap);
-        // return ResponseEntity.ok().body("{\"message\": \"" + response + "\"}");
     }
 
     @GetMapping("/get-details/{id}")
@@ -43,14 +42,22 @@ public class UserController {
     }
 
     @DeleteMapping(value = "/delete/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> deleteProfile(@PathVariable("id") Integer id) {
+    public ResponseEntity<Map<String, String>> deleteProfile(@PathVariable("id") Integer id) {
         String response = userService.deleteUser(id);
-        return ResponseEntity.ok().body("{\"message\": \"" + response + "\"}");
+        responseMap.put("message", response);
+        return ResponseEntity.ok().body(responseMap);
     }
 
     @GetMapping("/get-details")
     public ResponseEntity<List<User>> getAllUser() {
         List<User> allUser = userService.getAllUser();
         return ResponseEntity.ok().body(allUser);
+    }
+
+    @PostMapping(value = "/login", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Map<String, String>> login(@RequestBody User user) {
+        String response = userService.login(user);
+        responseMap.put("message", response);
+        return ResponseEntity.ok().body(responseMap);
     }
 }

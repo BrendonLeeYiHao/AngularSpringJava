@@ -2,10 +2,16 @@
 <a routerLink="/about-us" routerLinkActive="active" style="font-size: 20px;">{{ 'user' | translate }}</a>&nbsp;&nbsp;&nbsp;&nbsp;
 <a routerLink="/gemini" routerLinkActive="active" style="font-size: 20px;">{{ 'gemini_chatbot' | translate }}</a>
 
-<div style="float:right">
-    <button nz-button nzType="primary" (click)="switchLanguage('en')">English</button>&nbsp;
-    <button nz-button nzType="primary" (click)="switchLanguage('zh')">中文</button>&nbsp;
-    <button nz-button nzType="primary" (click)="switchLanguage('ms_MY')">Bahasa Melayu</button>
+<div style="float: right;">
+    <button nz-button nzType="primary" routerLink="/login" routerLinkActive="active">{{ 'login' | translate }}</button>&nbsp;
+    <button nz-button nzType="primary" nz-dropdown [nzDropdownMenu]="menu" nzPlacement="bottomRight">{{ 'language' | translate }}</button>
+    <nz-dropdown-menu #menu="nzDropdownMenu">
+        <ul nz-menu>
+            <li nz-menu-item (click)="switchLanguage('en')">English</li>
+            <li nz-menu-item (click)="switchLanguage('zh')">中文</li>
+            <li nz-menu-item (click)="switchLanguage('ms_MY')">Bahasa Melayu</li>
+        </ul>
+    </nz-dropdown-menu>
 </div>
 
 <router-outlet></router-outlet>

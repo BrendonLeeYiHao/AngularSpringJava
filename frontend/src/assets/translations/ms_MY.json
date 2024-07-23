@@ -30,5 +30,10 @@
     "update_user": "Kemas Kini Pengguna",
     "existing_user": "Pengguna Sedia Ada",
     "cancel": "Batal",
-    "ok": "OK"
+    "ok": "OK",
+    "language": "Bahasa",
+    "login": "Log masuk",
+    "log_in": "Log masuk",
+    "or": "atau",
+    "register_now": "Daftar sekarang!"
   }

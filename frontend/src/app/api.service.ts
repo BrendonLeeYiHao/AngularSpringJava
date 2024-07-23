@@ -31,4 +31,8 @@ export class ApiService {
   public getAllUser(): Observable<any> {
     return this.httpClient.get(this.SERVER_URL + "/user/get-details");
   }
+
+  public login(user: User): Observable<any> {
+    return this.httpClient.post(this.SERVER_URL + "/user/login", user);
+  }
 }

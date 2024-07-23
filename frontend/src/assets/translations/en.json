@@ -30,5 +30,10 @@
     "update_user": "Update User",
     "existing_user": "Existing User",
     "cancel": "Cancel",
-    "ok": "OK"
+    "ok": "OK",
+    "language": "Language",
+    "login": "Login",
+    "log_in": "Log in",
+    "or": "Or",
+    "register_now": "register now!"
 }
