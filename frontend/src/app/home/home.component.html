@@ -57,7 +57,7 @@
         <nz-form-item>
             <nz-form-label nzRequired [nzMd]="4" [nzSm]="24">{{ 'date_of_birth' | translate }}</nz-form-label>
             <nz-form-control nzHasFeedback nzErrorTip="{{ 'dob_required_msg' | translate }}">
-                <nz-date-picker formControlName="dob" style="width:100%" [nzDisabledDate]="disabledDate" [nzDefaultPickerValue]="showDate" ></nz-date-picker>
+                <nz-date-picker formControlName="dob" style="width:100%" [nzDisabledDate]="disabledDate" [nzDefaultPickerValue]="showDate"></nz-date-picker>
             </nz-form-control>
         </nz-form-item>
         <br>
@@ -70,7 +70,7 @@
                 </nz-select>
             </nz-form-control>
         </nz-form-item>
-        <nz-form-item nz-row class="register-area" >
+        <nz-form-item class="register-area">
             <nz-form-control>
                 <button nz-button nzType="primary" style="float:right" >{{ 'register' | translate }}</button>
             </nz-form-control>
