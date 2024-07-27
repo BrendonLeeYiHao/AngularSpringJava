@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="SeleniumTestSuite"  thread-count="5">
+    
+    <!-- Test for login functionality -->
+    <test name="HomeTest">
+        <classes>
+            <class name="com.example.demo.seleniumtest.ui.HomePageTest"/>
+        </classes>
+    </test>
+
+    <test name="LoginTest">
+        <classes>
+            <class name="com.example.demo.seleniumtest.ui.LoginPageTest"/>
+        </classes>
+    </test>
+</suite>
