@@ -15,7 +15,7 @@ public class AllureListener implements ITestListener {
     public void onTestSuccess(ITestResult result) {
         if (getDriver() instanceof TakesScreenshot) {
             byte[] screenshot = ((TakesScreenshot) getDriver()).getScreenshotAs(OutputType.BYTES);
-            Allure.getLifecycle().addAttachment("Success Screeenshot", "image/png", "png", screenshot);
+            Allure.getLifecycle().addAttachment(result.getMethod().getMethodName()+ "_success.png", "image/png", "png", screenshot);
         }
     }
 
@@ -23,12 +23,7 @@ public class AllureListener implements ITestListener {
     public void onTestFailure(ITestResult result) {
         if (getDriver() instanceof TakesScreenshot) {
             byte[] screenshot = ((TakesScreenshot) getDriver()).getScreenshotAs(OutputType.BYTES);
-            Allure.getLifecycle().addAttachment("Failed Screeenshot", "image/png", "png", screenshot);
+            Allure.getLifecycle().addAttachment(result.getMethod().getMethodName()+ "_failure.png", "image/png", "png", screenshot);
         }
     }
-
-    // @Attachment(value = "screenshot", type = "image/png")
-    // public byte[] attachScreenshot(byte[] screenshot) {
-    //     return screenshot;
-    // }
 }

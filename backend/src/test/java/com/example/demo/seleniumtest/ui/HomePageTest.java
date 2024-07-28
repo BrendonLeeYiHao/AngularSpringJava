@@ -13,13 +13,13 @@ public class HomePageTest extends BaseTest {
 	public void validateSuccessRegistration() {
 
 		WebElement nameInputField = findElement(byLocator(LocatorType.XPATH, "//input[@formControlName='name']"));
-		sendKeys(nameInputField, "Cecelia");
+		sendKeys(nameInputField, "Johnson");
 		
 		WebElement passwordInputField = findElement(byLocator(LocatorType.XPATH, "//input[@formControlName='password']"));
-		sendKeys(passwordInputField, "abc123");
+		sendKeys(passwordInputField, "aabbc123");
 		
 		WebElement emailInputField = findElement(byLocator(LocatorType.XPATH, "//input[@formControlName='email']"));
-		sendKeys(emailInputField, "cecelia1@gmail.com");
+		sendKeys(emailInputField, "johnson211@gmail.com");
 		
 		WebElement datePicker = findElement(byLocator(LocatorType.XPATH, "//label[text()='Date of Birth']/parent::nz-form-label/following-sibling::nz-form-control/div/div/nz-date-picker[@formControlName='dob']"));
 		clickOn(datePicker);
@@ -36,7 +36,6 @@ public class HomePageTest extends BaseTest {
 		WebElement btnSubmit = findElement(byLocator(LocatorType.XPATH, "//button//span[contains(text(), 'Register')]"));
 		clickOn(btnSubmit);
 		
-		WebElement btnOk = findElement(byLocator(LocatorType.XPATH, "//button[text()='OK']"));
-		clickOn(btnOk);
+		findElement(byLocator(LocatorType.XPATH, "//h2[text()='Success']/following-sibling::div//button[text()='OK']"));
 	}
 }

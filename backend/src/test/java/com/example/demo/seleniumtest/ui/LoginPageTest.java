@@ -6,11 +6,9 @@ import java.util.List;
 import org.openqa.selenium.WebElement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 import com.example.demo.model.User;
-import com.example.demo.seleniumtest.AllureListener;
 import com.example.demo.seleniumtest.LocatorType;
 import com.example.demo.service.UserService;
 
@@ -23,12 +21,11 @@ public class LoginPageTest extends BaseTest {
     @Test(description = "User enters correct name and password and click on login, thus login successfully")
     public void validateSuccessLogin() {
 
+        WebElement navigateToLoginPage = findElement(byLocator(LocatorType.XPATH, "//button/span[text()='Login']"));
+        clickOn(navigateToLoginPage);
+
         List<User> userList = userService.getAllUser();
-
         for (User user: userList) {
-            WebElement navigateToLoginPage = findElement(byLocator(LocatorType.XPATH, "//button/span[text()='Login']"));
-            clickOn(navigateToLoginPage);
-
             WebElement nameInputField = findElement(byLocator(LocatorType.XPATH, "//input[@formControlName='name']"));
             sendKeys(nameInputField, user.getName());
 
@@ -58,8 +55,7 @@ public class LoginPageTest extends BaseTest {
         WebElement btnLogin = findElement(byLocator(LocatorType.XPATH, "//button/span[text()='Log in']"));
         clickOn(btnLogin);
 
-        WebElement btnOk = findElement(byLocator(LocatorType.XPATH, "//h2[text()='Error']/following-sibling::div//button[text()='OK']"));
-        clickOn(btnOk);
+        findElement(byLocator(LocatorType.XPATH, "//h2[text()='Error']/following-sibling::div//button[text()='OK']"));
     }
 
     @Test(description = "User enters nothing and click on login, error message is shown on respective fields")
