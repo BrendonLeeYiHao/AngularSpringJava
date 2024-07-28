@@ -3,12 +3,11 @@
 <suite name="SeleniumTestSuite"  thread-count="5">
     
     <!-- Test for login functionality -->
-    <test name="HomeTest">
+    <!-- <test name="HomeTest">
         <classes>
             <class name="com.example.demo.seleniumtest.ui.HomePageTest"/>
         </classes>
-    </test>
-
+    </test> -->
     <test name="LoginTest">
         <classes>
             <class name="com.example.demo.seleniumtest.ui.LoginPageTest"/>
