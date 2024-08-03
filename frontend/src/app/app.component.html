@@ -1,9 +1,11 @@
-<a routerLink="/home" routerLinkActive="active" style="font-size: 20px;">{{ 'home' | translate }}</a>&nbsp;&nbsp;&nbsp;&nbsp;
-<a routerLink="/about-us" routerLinkActive="active" style="font-size: 20px;">{{ 'user' | translate }}</a>&nbsp;&nbsp;&nbsp;&nbsp;
-<a routerLink="/gemini" routerLinkActive="active" style="font-size: 20px;">{{ 'gemini_chatbot' | translate }}</a>
+<nz-space nzSize="large">
+    <button nz-button nzType="text" nzSize="large" routerLink="/home" routerLinkActive="active">{{ 'home' | translate }}</button>
+    <button nz-button nzType="text" nzSize="large" routerLink="/about-us" routerLinkActive="active" >{{ 'user' | translate }}</button>
+    <button nz-button nzType="text" nzSize="large" routerLink="/gemini" routerLinkActive="active" >{{ 'gemini_chatbot' | translate }}</button>
+</nz-space>
 
 <div style="float: right;">
-    <button nz-button nzType="primary" routerLink="/login" routerLinkActive="active">{{ 'login' | translate }}</button>&nbsp;
+    <button nz-button nzType="primary" routerLink="/login">{{ 'login' | translate }}</button>&nbsp;
     <button nz-button nzType="primary" nz-dropdown [nzDropdownMenu]="menu" nzPlacement="bottomRight">{{ 'language' | translate }}</button>
     <nz-dropdown-menu #menu="nzDropdownMenu">
         <ul nz-menu>
