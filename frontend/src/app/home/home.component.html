@@ -22,6 +22,7 @@
                     <ng-container *ngIf="control.hasError('pattern')">
                         <div [innerHTML]="'name_invalid_pattern_msg' | translate"></div>
                     </ng-container>
+                    <ng-container *ngIf="control.hasError('uniqueName')">{{ 'unique_name_msg' | translate }}</ng-container>
                 </ng-template>
             </nz-form-control>
         </nz-form-item>

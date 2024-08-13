@@ -35,5 +35,6 @@
     "login": "Log masuk",
     "log_in": "Log masuk",
     "or": "atau",
-    "register_now": "Daftar sekarang!"
-  }
+    "register_now": "Daftar sekarang!",
+    "unique_name_msg": "Nama sudah wujud. Sila pilih yang lain!"
+}

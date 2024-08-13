@@ -35,6 +35,6 @@
     "login": "登录",
     "log_in": "登录",
     "or": "或者",
-    "register_now": "立即注册！"
+    "register_now": "立即注册！",
+    "unique_name_msg": "名称已存在。请另选一个！"
 }
-  

@@ -35,5 +35,6 @@
     "login": "Login",
     "log_in": "Log in",
     "or": "Or",
-    "register_now": "register now!"
+    "register_now": "register now!",
+    "unique_name_msg": "Name has already existed. Please choose another one!"
 }
