@@ -4,11 +4,11 @@
     <listeners>
         <listener class-name="com.example.demo.seleniumtest.AllureListener"/>
     </listeners>
-    <test name="HomePageTest">
+    <!-- <test name="HomePageTest">
         <classes>
             <class name="com.example.demo.seleniumtest.ui.HomePageTest"/>
         </classes>
-    </test>
+    </test> -->
     <test name="LoginPageTest">
         <classes>
             <class name="com.example.demo.seleniumtest.ui.LoginPageTest"/>

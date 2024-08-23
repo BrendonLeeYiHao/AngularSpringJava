@@ -6,6 +6,7 @@ import java.util.List;
 import org.openqa.selenium.WebElement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import com.example.demo.model.User;
@@ -28,6 +29,9 @@ public class LoginPageTest extends BaseTest {
         for (User user: userList) {
             WebElement nameInputField = findElement(byLocator(LocatorType.XPATH, "//input[@formControlName='name']"));
             sendKeys(nameInputField, user.getName());
+
+            String enteredName = nameInputField.getAttribute("value");
+            Assert.assertEquals(enteredName, user.getName(), "Name input field value is incorrect.");
 
             WebElement passwordInputField = findElement(byLocator(LocatorType.XPATH, "//input[@formControlName='password']"));
             sendKeys(passwordInputField, user.getPassword());
