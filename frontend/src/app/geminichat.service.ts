@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { GoogleGenerativeAI } from '@google/generative-ai';
-import { BehaviorSubject, from, Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +12,7 @@ export class GeminichatService {
   private messageHistory: BehaviorSubject<any> = new BehaviorSubject(null);
 
   constructor() {
-    this.generativeAi = new GoogleGenerativeAI('AAAAAAAAAAAAAAAAAAAAAAA');    // Replaced with your own GEMINI Key
+    this.generativeAi = new GoogleGenerativeAI('AIzaSyBCEdtPnTXDIf1Gz87Tw44vtLGsT38rA9U');    // Replaced with your own GEMINI Key
   }
 
   async generateText(prompt: string) {

@@ -1,4 +1,4 @@
-<div style="padding:40px 0px">
+<div style="padding:10px 0px">
     <nz-table #basicTable [nzPageSize]="10" [nzScroll]="{ y: '800px' }" [nzData]="userList">
         <thead>
             <tr>
@@ -20,8 +20,8 @@
             <td>{{ user.dob | date: 'yyyy-MM-dd' }}</td>
             <td>{{ user.gender }}</td>
             <td>
-                <button nz-button nzType="primary" style="background-color:rgb(60, 230, 60);border-radius: 10px;" (click)="openUpdateModal(user)">{{ 'update' | translate }}</button>
-                <button nz-button nzType="primary" style="margin-left:10px;background-color:rgb(245, 43, 83);border-radius: 10px;" (click)="openDeleteModal(user.id)">{{ 'delete' | translate }}</button>
+                <button nz-button nzType="primary" style="background-color:rgb(60, 230, 60);border-radius: 10px;width: 100px;margin:0px 2px" (click)="openUpdateModal(user)">{{ 'update' | translate }}</button>
+                <button nz-button nzType="primary" style="background-color:rgb(245, 43, 83);border-radius: 10px;width: 100px;margin:0px 2px" (click)="openDeleteModal(user.id)">{{ 'delete' | translate }}</button>
             </td>
             </tr>
         </tbody>

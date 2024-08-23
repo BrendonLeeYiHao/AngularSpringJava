@@ -1,4 +1,80 @@
-<nz-space nzSize="large">
+<div class="min-h-full">
+    <nav style="background-color: rgb(245, 213, 209);">
+        <div class="mx-auto max-w-7xl px-4 sm:px-4 lg:px-8">
+            <div class="flex h-20 items-center justify-between">
+                <div class="flex items-center h-full py-6">
+                    <div class="flex-shrink-0">
+                        <a routerLink=""><img class="h-10 w-30" src="/assets/Demo.png" alt="Demo"></a>
+                    </div>
+                    <div class="hidden lg:block">
+                        <div class="ml-10 flex items-center justify-center space-x-5">
+                            <a routerLink="/home" routerLinkActive="active" class="text-black-300 hover:bg-gray-700 hover:text-white rounded-md px-4 py-2 text-base font-medium" aria-current="page">{{ 'home' | translate }}</a>
+                            <a routerLink="/about-us" routerLinkActive="active" class="text-black-300 hover:bg-gray-700 hover:text-white rounded-md px-4 py-2 text-base font-medium text-center">{{ 'user' | translate }}</a>
+                            <a routerLink="/gemini" routerLinkActive="active" class="hover:bg-gray-700 hover:text-white rounded-md px-4 py-2 text-base font-medium" style="color:goldenrod">{{ 'gemini_chatbot' | translate }}</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="hidden lg:block">
+                    <button routerLink="/login" routerLinkActive="active" class="text-black-300 hover:bg-gray-700 hover:text-white font-medium px-7 py-2" style="background-color: rgb(76, 218, 80);border-radius:30px">{{ 'login' | translate }}</button>
+                    <button nz-dropdown [nzDropdownMenu]="menu" [nzPlacement]="'bottomRight'" class="text-black-300 hover:bg-gray-700 hover:text-white font-medium px-7 py-2" style="background-color: rgb(170, 185, 171);border-radius:30px; margin-left: 10px">{{ 'language' | translate }}</button>
+                    <div class="ml-4 flex items-center md:ml-6">
+                        <!-- Dropdown -->
+                        <div class="relative ml-3">             
+                            <nz-dropdown-menu #menu="nzDropdownMenu">
+                                <ul nz-menu nzPlacement="left" style="margin-top:5px;border-radius: 10px;">
+                                    <li nz-menu-item style="border-radius:10px;padding:10px" (click)="switchLanguage('en')">English</li>
+                                    <li nz-menu-item style="border-radius:10px;padding:10px" (click)="switchLanguage('zh')">中文</li>
+                                    <li nz-menu-item style="border-radius:10px;padding:10px" (click)="switchLanguage('ms_MY')">Bahasa Melayu</li>
+                                </ul>
+                            </nz-dropdown-menu>
+                        </div>
+                    </div>
+                </div>
+                <div class="-mr-2 flex lg:hidden">
+                    <!-- Mobile menu button -->
+                    <button type="button" class="inline-flex items-center justify-center rounded-md bg-gray-800 p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800" aria-controls="mobile-menu" aria-expanded="false" (click)="toggleMenu()">
+                        <span class="sr-only">Open main menu</span>
+                        <!-- Menu open: "hidden", Menu closed: "block" -->
+                        <svg class="block h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="false">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                        </svg>
+                        <!-- Menu open: "block", Menu closed: "hidden" -->
+                        <svg class="hidden h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile menu, show/hide based on menu state. -->
+        <div class="lg:hidden hidden" id="mobile-menu">
+            <div class="space-y-1 px-2 pb-3 pt-2 sm:px-3">
+                <a routerLink="/home" routerLinkActive="active" (click)="toggleMenu()" class="text-black-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">{{ 'home' | translate }}</a>
+                <a routerLink="/about-us" routerLinkActive="active" (click)="toggleMenu()" class="text-black-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">{{ 'user' | translate }}</a>
+                <a routerLink="/gemini" routerLinkActive="active" (click)="toggleMenu()" class="hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium" style="color:goldenrod">{{ 'gemini_chatbot' | translate }}</a>
+                <a routerLink="/login" routerLinkActive="active" (click)="toggleMenu()" class="text-black-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">{{ 'login' | translate }}</a>
+            </div>
+            <div class="border-t border-gray-700 pb-3 pt-4">
+                <div class="space-y-1 px-2 sm:px-3">
+                    <a (click)="toggleMenu()" class="block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white" (click)="switchLanguage('en')">English</a>
+                    <a (click)="toggleMenu()" class="block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white" (click)="switchLanguage('zh')">中文</a>
+                    <a (click)="toggleMenu()" class="block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white" (click)="switchLanguage('ms_MY')">Bahasa Melayu</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <main>
+        <router-outlet></router-outlet>
+    </main>
+</div>
+<nz-back-top [nzTemplate]="tpl" [nzVisibilityHeight]="100" >
+    <ng-template #tpl>
+        <div class="ant-back-top-inner"><span nz-icon nzType="arrow-up" nzTheme="outline"></span></div>
+    </ng-template>
+</nz-back-top>
+  
+
+<!-- <nz-space nzSize="large">
     <button nz-button nzType="text" nzSize="large" routerLink="/home" routerLinkActive="active">{{ 'home' | translate }}</button>
     <button nz-button nzType="text" nzSize="large" routerLink="/about-us" routerLinkActive="active" >{{ 'user' | translate }}</button>
     <button nz-button nzType="text" nzSize="large" routerLink="/gemini" routerLinkActive="active" >{{ 'gemini_chatbot' | translate }}</button>
@@ -16,4 +92,4 @@
     </nz-dropdown-menu>
 </div>
 
-<router-outlet></router-outlet>
+<router-outlet></router-outlet> -->

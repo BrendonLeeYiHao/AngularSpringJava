@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { User } from '../model/userModel';
 import { DatePipe } from '@angular/common';
+import { TranslationService } from '../translation.service';
 
 @Component({
   selector: 'app-aboutus',
@@ -12,9 +13,7 @@ import { DatePipe } from '@angular/common';
 })
 export class AboutusComponent implements OnInit{
 
-  constructor(private apiService: ApiService, private fb: FormBuilder, private datePipe: DatePipe) {
-
-  }
+  constructor(private apiService: ApiService, private fb: FormBuilder, private datePipe: DatePipe, private translationService: TranslationService) {}
 
   userList: any[] = [];
   isVisible = false;
@@ -53,22 +52,29 @@ export class AboutusComponent implements OnInit{
 
   openDeleteModal(id:number){
     Swal.fire({
-      title: 'Do you wish to delete account of ID ' + id,
+      title: this.translationService.translates('do_you_want_to_delete_if_of') + " " + id,
       icon: 'question',
       showConfirmButton:true,
       confirmButtonColor: 'green',
-      confirmButtonText: 'Yes',
+      confirmButtonText: this.translationService.translates('yes'),
       showCloseButton:true,
       showCancelButton:true,
       cancelButtonColor: '#d33',
-      cancelButtonText: 'No'
+      cancelButtonText: this.translationService.translates('no')
     }).then((result) =>{
       if(result.isConfirmed){
         this.apiService.deleteUser(id).subscribe((res) => {
           this.response = res.message;
-          Swal.fire('Success', this.response, "success");
-          this.userList = this.userList.filter(user => user.id != id);
-          this.initializeForm();
+          if(this.response) {
+            Swal.fire({
+              title: this.translationService.translates('success'), 
+              text: this.translationService.translates('delete_successfully'), 
+              icon: "success",
+              confirmButtonText: this.translationService.translates('ok')
+            });
+            this.userList = this.userList.filter(user => user.id != id);
+            this.initializeForm();
+          }
         })
       }
     })
@@ -92,14 +98,21 @@ export class AboutusComponent implements OnInit{
 
       this.apiService.updateUser(updatedUser).subscribe((res) =>{
         this.response = res.message;
-        Swal.fire("Success", this.response, "success");    
-        this.userList = this.userList.map(
-          user => user.id === this.updatedForm.value.id ? {
-            ...user, ...updatedUser
-          } : user
-        );
-        this.isVisible = false;
-        this.initializeForm();
+        if(this.response) {
+          Swal.fire({
+            title: this.translationService.translates('success'), 
+            text: this.translationService.translates('update_successfully'), 
+            icon: "success",
+            confirmButtonText: this.translationService.translates('ok')
+          });    
+          this.userList = this.userList.map(
+            user => user.id === this.updatedForm.value.id ? {
+              ...user, ...updatedUser
+            } : user
+          );
+          this.isVisible = false;
+          this.initializeForm();
+        }
       })
     }
     else{
@@ -107,7 +120,12 @@ export class AboutusComponent implements OnInit{
         if (control.invalid) {
           control.markAsDirty();
           control.updateValueAndValidity({ onlySelf: true });
-          Swal.fire("Error","Please fill up the fields correctly!","error");
+          Swal.fire({
+            title: this.translationService.translates('error'),
+            text: this.translationService.translates("please_fill_up_the_fields_correctly"),
+            icon: "error",
+            confirmButtonText: this.translationService.translates('ok')
+          });
         }
       }); 
     }

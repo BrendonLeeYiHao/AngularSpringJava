@@ -18,6 +18,7 @@
     "dob_required_msg": "必须填写出生日期！",
     "gender_required_msg": "必须选择性别！",
     "success": "成功",
+    "error": "错误",
     "about_us": "关于我们",
     "gemini_chatbot": "Gemini 聊天机器人",
     "send": "发送",
@@ -36,5 +37,18 @@
     "log_in": "登录",
     "or": "或者",
     "register_now": "立即注册！",
-    "unique_name_msg": "名称已存在。请另选一个！"
+    "unique_name_msg": "名称已存在。请另选一个！",
+    "register_successfully": "注册成功",
+    "incorrect_credentials": "用户名或密码错误",
+    "login_successfully": "成功登录",
+    "update_successfully": "更新成功",
+    "delete_successfully": "删除成功",
+    "no": "否",
+    "yes": "是",
+    "do_you_want_to_delete_if_of": "你是否想删除 ID 为",
+    "confirmation": "确认",
+    "select_gender": "选择性别",
+    "select_date": "选择日期",
+    "type_to_search": "输入搜索",
+    "please_fill_up_the_fields_correctly": "请正确填写字段"
 }

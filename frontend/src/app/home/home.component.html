@@ -1,8 +1,8 @@
 <div style="margin:auto; max-width:800px">
-    <h1 style="text-align:center;margin-top:40px;font-weight:bold;font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif; padding:0px 20px">
+    <h1 style="text-align:center;margin-top:40px;font-weight:bold;font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif; padding:0px 10px">
         {{ 'registration' | translate }}
     </h1>
-    <div style="padding:40px 20px">
+    <div style="padding:20px 10px">
         <!-- <div nz-row nzAlign="middle">
             <div nz-col nzSpan="22">
               <input nz-input [(ngModel)]="searchInput" placeholder="Enter id to search ...">
@@ -58,14 +58,14 @@
         <nz-form-item>
             <nz-form-label nzRequired [nzMd]="4" [nzSm]="24">{{ 'date_of_birth' | translate }}</nz-form-label>
             <nz-form-control nzHasFeedback nzErrorTip="{{ 'dob_required_msg' | translate }}">
-                <nz-date-picker formControlName="dob" style="width:100%" [nzDisabledDate]="disabledDate" [nzDefaultPickerValue]="showDate"></nz-date-picker>
+                <nz-date-picker formControlName="dob" nzPlaceHolder="{{ 'select_date' | translate }}" style="width:100%" [nzDisabledDate]="disabledDate" [nzDefaultPickerValue]="showDate"></nz-date-picker>
             </nz-form-control>
         </nz-form-item>
         <br>
         <nz-form-item>
             <nz-form-label nzRequired [nzMd]="4" [nzSm]="24">{{ 'gender' | translate }}</nz-form-label>
             <nz-form-control nzHasFeedback nzErrorTip="{{ 'gender_required_msg' | translate }}">
-                <nz-select formControlName="gender" nzPlaceHolder="Male">
+                <nz-select formControlName="gender" nzPlaceHolder="{{ 'select_gender' | translate }}">
                     <nz-option nzLabel="Male" nzValue="Male"></nz-option>
                     <nz-option nzLabel="Female" nzValue="Female"></nz-option>
                 </nz-select>

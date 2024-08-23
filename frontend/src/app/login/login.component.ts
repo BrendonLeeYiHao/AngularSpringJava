@@ -3,6 +3,7 @@ import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms
 import { User } from '../model/userModel';
 import { ApiService } from '../api.service';
 import Swal from 'sweetalert2';
+import { TranslationService } from '../translation.service';
 
 @Component({
   selector: 'app-login',
@@ -11,7 +12,7 @@ import Swal from 'sweetalert2';
 })
 export class LoginComponent {
 
-  constructor(private fb: UntypedFormBuilder, private apiService: ApiService) {
+  constructor(private fb: UntypedFormBuilder, private apiService: ApiService, private translationService: TranslationService) {
     this.validateForm = this.fb.group({
       name: [null, [Validators.required]],
       password: [null, [Validators.required]]
@@ -34,10 +35,20 @@ export class LoginComponent {
       this.apiService.login(user).subscribe((res) => {
         this.response = res.message;
         if (res.message == "true") {
-          Swal.fire("Success", "Login Successfully!", "success");
+          Swal.fire({
+            title: this.translationService.translates('success'), 
+            text: this.translationService.translates('login_successfully'), 
+            icon: "success",
+            confirmButtonText: this.translationService.translates('ok')
+          });
         }
         else {
-          Swal.fire("Error", "Incorrect Name or Password!", "error");
+          Swal.fire({
+            title: this.translationService.translates('error'), 
+            text: this.translationService.translates('incorrect_credentials'), 
+            icon: "error",
+            confirmButtonText: this.translationService.translates('ok')
+          });
         }
       })
     } else {

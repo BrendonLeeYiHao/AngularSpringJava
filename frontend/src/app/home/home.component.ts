@@ -66,9 +66,16 @@ export class HomeComponent {
 
       this.apiService.register(newUser).subscribe((res) => {
         this.response = res.message;
-        Swal.fire(this.translationService.translates("success"), this.response, "success");
-        this.existingNameList.push(newUser.name);
-        this.registerForm.reset();
+        if(this.response) {
+          Swal.fire({
+            title: this.translationService.translates("success"),
+            text: this.translationService.translates("register_successfully"),
+            icon: 'success',
+            confirmButtonText: this.translationService.translates("ok")
+          });
+          this.existingNameList.push(newUser.name);
+          this.registerForm.reset();
+        }
       })
     }
     else {
@@ -76,7 +83,12 @@ export class HomeComponent {
         if (control.invalid) {
           control.markAsDirty();
           control.updateValueAndValidity({ onlySelf: true });
-          Swal.fire("Error","Please fill up the fields correctly!","error");
+          Swal.fire({
+            title: this.translationService.translates('error'),
+            text: this.translationService.translates("please_fill_up_the_fields_correctly"),
+            icon: "error",
+            confirmButtonText: this.translationService.translates('ok')
+          });
         }
       }); 
     }
@@ -89,58 +101,54 @@ export class HomeComponent {
     return current.getTime() > minDate.getTime();
   }
 
-  searchById() {
-    if(this.searchInput != null) {
-      this.apiService.getUserById(this.searchInput).subscribe((res) => {
-        console.log(res);
-        this.userProfile = res;
-        this.registerForm.controls['name'].setValue(this.userProfile.name);
-        this.registerForm.controls['password'].setValue(this.userProfile.password);
-        this.registerForm.controls['email'].setValue(this.userProfile.email);
-        const retrievedDate = this.datePipe.transform(this.userProfile.dob, 'yyyy-MM-dd');
-        this.registerForm.controls['dob'].setValue(retrievedDate);
-        this.registerForm.controls['gender'].setValue(this.userProfile.gender);
-      })
-    }
-  }
+  // searchById() {
+  //   if(this.searchInput != null) {
+  //     this.apiService.getUserById(this.searchInput).subscribe((res) => {
+  //       console.log(res);
+  //       this.userProfile = res;
+  //       this.registerForm.controls['name'].setValue(this.userProfile.name);
+  //       this.registerForm.controls['password'].setValue(this.userProfile.password);
+  //       this.registerForm.controls['email'].setValue(this.userProfile.email);
+  //       const retrievedDate = this.datePipe.transform(this.userProfile.dob, 'yyyy-MM-dd');
+  //       this.registerForm.controls['dob'].setValue(retrievedDate);
+  //       this.registerForm.controls['gender'].setValue(this.userProfile.gender);
+  //     })
+  //   }
+  // }
 
-  updateProfile() {
-    if(this.registerForm.valid) {
-      const updatedUser: User = {
-        id: this.userProfile.id,
-        name: this.registerForm.value.name,
-        password: this.registerForm.value.password,
-        email: this.registerForm.value.email,
-        dob: this.datePipe.transform(this.registerForm.value.dob, 'yyyy-MM-dd'),
-        gender: this.registerForm.value.gender
-      }
+  // updateProfile() {
+  //   if(this.registerForm.valid) {
+  //     const updatedUser: User = {
+  //       id: this.userProfile.id,
+  //       name: this.registerForm.value.name,
+  //       password: this.registerForm.value.password,
+  //       email: this.registerForm.value.email,
+  //       dob: this.datePipe.transform(this.registerForm.value.dob, 'yyyy-MM-dd'),
+  //       gender: this.registerForm.value.gender
+  //     }
 
-      this.apiService.updateUser(updatedUser).subscribe((res) => {
-        this.response = res.message;
-        Swal.fire("Success", this.response, "success");
-      })
-    } else {
-      Object.values(this.registerForm.controls).forEach(control => {
-        if (control.invalid) {
-          control.markAsDirty();
-          control.updateValueAndValidity({ onlySelf: true });
-          Swal.fire("Error","Please fill up the fields correctly!","error");
-        }
-      }); 
-    }
-  }
+  //     this.apiService.updateUser(updatedUser).subscribe((res) => {
+  //       this.response = res.message;
+  //       Swal.fire("Success", this.response, "success");
+  //     })
+  //   } else {
+  //     Object.values(this.registerForm.controls).forEach(control => {
+  //       if (control.invalid) {
+  //         control.markAsDirty();
+  //         control.updateValueAndValidity({ onlySelf: true });
+  //         Swal.fire("Error","Please fill up the fields correctly!","error");
+  //       }
+  //     }); 
+  //   }
+  // }
 
-  deleteProfile() {
-    if(this.searchInput != null) {
-      this.apiService.deleteUser(this.searchInput).subscribe((res) => {
-        this.response = res.message;
-        Swal.fire("Success", this.response, "success");
-        this.registerForm.reset();
-      })
-    }
-  }
-
-  switchLanguage(lang: string) {
-    this.translationService.setLanguage(lang);
-  }
+  // deleteProfile() {
+  //   if(this.searchInput != null) {
+  //     this.apiService.deleteUser(this.searchInput).subscribe((res) => {
+  //       this.response = res.message;
+  //       Swal.fire("Success", this.response, "success");
+  //       this.registerForm.reset();
+  //     })
+  //   }
+  // }
 }

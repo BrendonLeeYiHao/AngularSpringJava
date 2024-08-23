@@ -18,6 +18,7 @@
     "dob_required_msg": "DOB is required!",
     "gender_required_msg": "Gender is required!",
     "success": "Success",
+    "error": "Error",
     "about_us": "About Us",
     "gemini_chatbot": "Gemini Chatbot",
     "send": "Send",
@@ -36,5 +37,18 @@
     "log_in": "Log in",
     "or": "Or",
     "register_now": "register now!",
-    "unique_name_msg": "Name has already existed. Please choose another one!"
+    "unique_name_msg": "Name has already existed. Please choose another one!",
+    "register_successfully": "Register Successfully",
+    "incorrect_credentials": "Incorrect Username or Password",
+    "login_successfully": "Login Successfully",
+    "update_successfully": "Update Successfully",
+    "delete_successfully": "Delete Successfully",
+    "no": "No",
+    "yes": "Yes",
+    "do_you_want_to_delete_if_of": "Do you want to delete ID of",
+    "confirmation": "Confirmation",
+    "select_gender": "Select gender",
+    "select_date": "Select date",
+    "type_to_search": "Type to search",
+    "please_fill_up_the_fields_correctly": "Please fill up the fields correctly"
 }
