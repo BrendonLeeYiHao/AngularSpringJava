@@ -13,13 +13,13 @@ public class HomePageTest extends BaseTest {
 	public void validateSuccessRegistration() {
 
 		WebElement nameInputField = findElement(byLocator(LocatorType.XPATH, "//input[@formControlName='name']"));
-		sendKeys(nameInputField, "Johnson");
+		sendKeys(nameInputField, "Candie");
 		
 		WebElement passwordInputField = findElement(byLocator(LocatorType.XPATH, "//input[@formControlName='password']"));
-		sendKeys(passwordInputField, "aabbc123");
+		sendKeys(passwordInputField, "aac123");
 		
 		WebElement emailInputField = findElement(byLocator(LocatorType.XPATH, "//input[@formControlName='email']"));
-		sendKeys(emailInputField, "johnson211@gmail.com");
+		sendKeys(emailInputField, "candie211@gmail.com");
 		
 		WebElement datePicker = findElement(byLocator(LocatorType.XPATH, "//label[text()='Date of Birth']/parent::nz-form-label/following-sibling::nz-form-control/div/div/nz-date-picker[@formControlName='dob']"));
 		clickOn(datePicker);

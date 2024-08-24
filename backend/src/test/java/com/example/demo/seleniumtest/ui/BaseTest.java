@@ -13,6 +13,7 @@ public class BaseTest extends AbstractTestNGSpringContextTests {
     @BeforeMethod
     public void setUp() {
         getDriver();
+        setWindowSize();
         getUrl(Constants.URL);
     }
 

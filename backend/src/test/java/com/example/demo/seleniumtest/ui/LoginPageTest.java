@@ -22,7 +22,7 @@ public class LoginPageTest extends BaseTest {
     @Test(description = "User enters correct name and password and click on login, thus login successfully")
     public void validateSuccessLogin() {
 
-        WebElement navigateToLoginPage = findElement(byLocator(LocatorType.XPATH, "//button/span[text()='Login']"));
+        WebElement navigateToLoginPage = findElement(byLocator(LocatorType.XPATH, "//button[text()='Login']"));
         clickOn(navigateToLoginPage);
 
         List<User> userList = userService.getAllUser();
@@ -47,7 +47,7 @@ public class LoginPageTest extends BaseTest {
     @Test(description = "User enters incorrect name or password and click on login, error message is shown")
     public void validateFailedLogin() {
 
-        WebElement navigateToLoginPage = findElement(byLocator(LocatorType.XPATH, "//button/span[text()='Login']"));
+        WebElement navigateToLoginPage = findElement(byLocator(LocatorType.XPATH, "//button[text()='Login']"));
         clickOn(navigateToLoginPage);
 
         WebElement nameInputField = findElement(byLocator(LocatorType.XPATH, "//input[@formControlName='name']"));
@@ -65,7 +65,7 @@ public class LoginPageTest extends BaseTest {
     @Test(description = "User enters nothing and click on login, error message is shown on respective fields")
     public void validateFailedLoginWithNoInput() {
 
-        WebElement navigateToLoginPage = findElement(byLocator(LocatorType.XPATH, "//button/span[text()='Login']"));
+        WebElement navigateToLoginPage = findElement(byLocator(LocatorType.XPATH, "//button[text()='Login']"));
         clickOn(navigateToLoginPage);
 
         WebElement btnLogin = findElement(byLocator(LocatorType.XPATH, "//button/span[text()='Log in']"));

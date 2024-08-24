@@ -3,6 +3,7 @@ package com.example.demo.seleniumtest;
 import java.time.Duration;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -29,6 +30,10 @@ public class WebDriverUtils {
             initializeDriver();
         }
         return driver;
+    }
+
+    public static void setWindowSize() {
+        driver.manage().window().setSize(new Dimension(1366, 768));
     }
     
     public static void getUrl(String url) {
