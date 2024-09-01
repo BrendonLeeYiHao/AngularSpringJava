@@ -9,7 +9,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import com.example.demo.model.User;
+import com.example.demo.dto.UserDTO;
 import com.example.demo.seleniumtest.LocatorType;
 import com.example.demo.service.UserService;
 
@@ -25,8 +25,8 @@ public class LoginPageTest extends BaseTest {
         WebElement navigateToLoginPage = findElement(byLocator(LocatorType.XPATH, "//button[text()='Login']"));
         clickOn(navigateToLoginPage);
 
-        List<User> userList = userService.getAllUser();
-        for (User user: userList) {
+        List<UserDTO> userList = userService.getAllUserDTO();
+        for (UserDTO user: userList) {
             WebElement nameInputField = findElement(byLocator(LocatorType.XPATH, "//input[@formControlName='name']"));
             sendKeys(nameInputField, user.getName());
 

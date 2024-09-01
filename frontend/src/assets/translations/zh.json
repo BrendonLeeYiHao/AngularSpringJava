@@ -16,6 +16,7 @@
     "email_required_msg": "必须填写邮箱！",
     "email_invalid_msg": "邮箱格式不正确！",
     "dob_required_msg": "必须填写出生日期！",
+    "age_not_eighteen_msg": "年龄需满18岁及以上！",
     "gender_required_msg": "必须选择性别！",
     "success": "成功",
     "error": "错误",

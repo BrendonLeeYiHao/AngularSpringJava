@@ -49,7 +49,7 @@
                 <br>
                 <nz-form-item>
                     <nz-form-label nzRequired [nzMd]="6" [nzSm]="24">{{ 'password' | translate }}</nz-form-label>
-                    <nz-form-control nzHasFeedback [nzErrorTip]="passwordErrorTpl">
+                    <nz-form-control [nzErrorTip]="passwordErrorTpl">
                         <nz-input-group [nzSuffix]="suffixTemplate">
                             <input [type]="passwordVisible ? 'text': 'password'" nz-input formControlName="password" placeholder="Aab@cd12">
                         </nz-input-group>
@@ -59,19 +59,21 @@
                         <ng-template #passwordErrorTpl let-control>
                             <ng-container *ngIf="control.hasError('required')">{{ 'password_required_msg' | translate }}</ng-container>
                         </ng-template>
+                        <span *ngIf="errorMsg.password" style="color: red" [innerHTML]="errorMsg.password | translate"></span>
                     </nz-form-control>
                 </nz-form-item>
                 <br>
                 <nz-form-item>
                     <nz-form-label nzRequired [nzMd]="6" [nzSm]="24">{{ 'email' | translate }}</nz-form-label>
-                    <nz-form-control nzHasFeedback [nzErrorTip]="emailErrorTpl">
+                    <nz-form-control [nzErrorTip]="emailErrorTpl">
                         <input nz-input formControlName="email" placeholder="examplelee@gmail.com">
                         <ng-template #emailErrorTpl let-control>
                             <ng-container *ngIf="control.hasError('required')">{{ 'email_required_msg' | translate }}</ng-container>
                             <ng-container *ngIf="control.hasError('email') && !control.hasError('required')">
                               {{ 'email_invalid_msg' | translate }}
                             </ng-container>
-                          </ng-template>
+                        </ng-template>
+                        <span *ngIf="errorMsg.email" style="color: red" [innerHTML]="errorMsg.email | translate"></span>
                     </nz-form-control>
                 </nz-form-item>
                 <br>

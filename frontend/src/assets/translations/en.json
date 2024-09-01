@@ -16,6 +16,7 @@
     "email_required_msg": "Email is required!",
     "email_invalid_msg": "Invalid Email!",
     "dob_required_msg": "DOB is required!",
+    "age_not_eighteen_msg": "Age needs to be 18 years old and above!",
     "gender_required_msg": "Gender is required!",
     "success": "Success",
     "error": "Error",

@@ -32,7 +32,7 @@ export class LoginComponent {
         dob: "",
         gender: ""
       }
-      this.apiService.login(user).subscribe((res) => {
+      this.apiService.loginDTO(user).subscribe((res) => {
         this.response = res.message;
         if (res.message == "true") {
           Swal.fire({

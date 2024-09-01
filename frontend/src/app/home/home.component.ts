@@ -22,6 +22,7 @@ export class HomeComponent {
   messageTitle: any;
   existingNameList: string[] = [];
   userList: any[] = [];
+  errorMsg: any = {};
 
   constructor(private fb: UntypedFormBuilder, private apiService: ApiService, private datePipe: DatePipe, private translationService: TranslationService) {
     this.registerForm = this.fb.group({
@@ -36,13 +37,35 @@ export class HomeComponent {
   }
 
   ngOnInit(): void {
-    this.apiService.getAllUser().subscribe((res) => {
+    this.apiService.getAllUserDTO().subscribe((res) => {
       this.userList = res;
       this.existingNameList = this.userList.map(user => user.name);
     })
     const today = new Date();
     const minDate = new Date(today.getFullYear() - 18, today.getMonth(), today.getDate() + 1);
     this.showDate = minDate;
+
+    this.registerForm.valueChanges.subscribe(() => {
+      this.clearErrorMessages();
+    })
+  }
+
+  private clearErrorMessages(): void {
+    if(this.registerForm.get('name')) {
+      delete this.errorMsg.name;
+    }
+    if(this.registerForm.get('password')) {
+      delete this.errorMsg.password;
+    }
+    if(this.registerForm.get('email')) {
+      delete this.errorMsg.email;
+    }
+    if(this.registerForm.get('dob')) {
+      delete this.errorMsg.dob;
+    }
+    if(this.registerForm.get('gender')) {
+      delete this.errorMsg.gender;
+    }
   }
 
   uniqueName(control: AbstractControl, existingNameList:string[]): {[key:string]:any} | null{
@@ -64,19 +87,23 @@ export class HomeComponent {
         gender: this.registerForm.value.gender
       }
 
-      this.apiService.register(newUser).subscribe((res) => {
-        this.response = res.message;
-        if(this.response) {
-          Swal.fire({
-            title: this.translationService.translates("success"),
-            text: this.translationService.translates("register_successfully"),
-            icon: 'success',
-            confirmButtonText: this.translationService.translates("ok")
-          });
-          this.existingNameList.push(newUser.name);
-          this.registerForm.reset();
-        }
-      })
+      this.apiService.registerDTO(newUser).subscribe(
+        (res) => {
+          this.response = res.message;
+          if(this.response) {
+            Swal.fire({
+              title: this.translationService.translates("success"),
+              text: this.translationService.translates("register_successfully"),
+              icon: 'success',
+              confirmButtonText: this.translationService.translates("ok")
+            });
+            this.existingNameList.push(newUser.name);
+            this.registerForm.reset();
+          }
+        },
+        err => {
+          this.errorMsg = err.error;
+        })
     }
     else {
       Object.values(this.registerForm.controls).forEach(control => {

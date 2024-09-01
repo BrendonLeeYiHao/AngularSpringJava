@@ -9,6 +9,7 @@ import { User } from './model/userModel';
 export class ApiService {
 
   private SERVER_URL = "http://localhost:8080"
+  // private SERVER_URL = "https://javaspringbackend.azurewebsites.net"
 
   constructor(private httpClient: HttpClient) { }
 
@@ -24,15 +25,33 @@ export class ApiService {
     return this.httpClient.put(this.SERVER_URL + "/user/update", user);
   }
 
-  public deleteUser(id: number): Observable<any> {
-    return this.httpClient.delete(`${this.SERVER_URL}/user/delete/${id}`);
-  }
-
   public getAllUser(): Observable<any> {
     return this.httpClient.get(this.SERVER_URL + "/user/get-details");
   }
 
   public login(user: User): Observable<any> {
     return this.httpClient.post(this.SERVER_URL + "/user/login", user);
+  }
+
+
+  // With DTO (Currently In Use)
+  public registerDTO(user: User): Observable<any> {
+    return this.httpClient.post(this.SERVER_URL + "/user/register-dto", user);
+  }
+
+  public getAllUserDTO(): Observable<any> {
+    return this.httpClient.get(this.SERVER_URL + "/user/get-details-dto");
+  }
+
+  public updateUserDTO(user: User): Observable<any> {
+    return this.httpClient.put(this.SERVER_URL + "/user/update-dto", user);
+  }
+
+  public deleteUser(id: number): Observable<any> {
+    return this.httpClient.delete(`${this.SERVER_URL}/user/delete/${id}`);
+  }
+
+  public loginDTO(user: User): Observable<any> {
+    return this.httpClient.post(this.SERVER_URL + "/user/login-dto", user);
   }
 }

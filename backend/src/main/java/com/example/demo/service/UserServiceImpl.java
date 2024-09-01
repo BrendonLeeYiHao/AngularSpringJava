@@ -1,23 +1,42 @@
 package com.example.demo.service;
 
+import java.time.LocalDate;
+import java.time.Period;
+import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.example.demo.dto.UserDTO;
+import com.example.demo.exception.AgeNotEighteenException;
+import com.example.demo.exception.UserAlreadyExistsException;
+import com.example.demo.exception.UserNotFoundException;
 import com.example.demo.model.User;
 import com.example.demo.repository.UserRepository;
 
 @Service
 public class UserServiceImpl implements UserService {
 
+    private final ModelMapper modelMapper = new ModelMapper();
+
     @Autowired
     private UserRepository userRepository;
 
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
+
+    public UserDTO convertToDTO(User user) {
+        return modelMapper.map(user, UserDTO.class);
+    }
+
+    public User convertToEntity(UserDTO userDTO) {
+        return modelMapper.map(userDTO, User.class);
+    }
 
     @Override
     public String createUser(User user) {
@@ -75,5 +94,67 @@ public class UserServiceImpl implements UserService {
     public boolean checkPassword(String rawPassword, String hashedPassword) {
         return passwordEncoder.matches(rawPassword, hashedPassword);
     }
-}
 
+
+    // With DTO (Currently In Use)
+    @Override
+    public String createUser(UserDTO userDTO) {
+        User existingUser = userRepository.findByName(userDTO.getName());
+        if(existingUser != null) {
+            throw new UserAlreadyExistsException("unique_name_msg");
+        }
+        if(isValidDob(userDTO.getDob())) {
+            userRepository.save(convertToEntity(userDTO));
+        } else {
+            throw new AgeNotEighteenException("age_not_eighteen_msg");
+        }
+        return "Register Successfully!";
+    } 
+
+    private boolean isValidDob(Date dob) {
+        LocalDate dobLocalDate = new java.sql.Date(dob.getTime()).toLocalDate();
+        LocalDate now = LocalDate.now();
+        int age = Period.between(dobLocalDate, now).getYears();
+        return age >= 18;
+    }
+
+    @Override
+    public List<UserDTO> getAllUserDTO() {
+        Sort sortById = Sort.by("id").ascending();
+        List<User> users = userRepository.findAll(sortById);
+        return users.stream()
+                .map(this::convertToDTO)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public String updateProfile(UserDTO userDTO) {
+        User existingUser = getProfileById(userDTO.getId());
+        if (existingUser == null) {
+            throw new UserNotFoundException("User with ID " + userDTO.getId() + " not found.");
+        }
+        if (existingUser.getId() == userDTO.getId() && 
+        existingUser.getName() == userDTO.getName() &&
+        existingUser.getDob() == userDTO.getDob() && 
+        existingUser.getGender() == userDTO.getGender()) {
+            userRepository.save(convertToEntity(userDTO));
+            return "Update Successfully!";  
+        } else {
+            throw new Error("Only password and email are modifiable!");
+        }  
+    }
+
+    @Override
+    public String login(UserDTO userDTO) {
+        User retrievedUser = userRepository.findByName(userDTO.getName());
+        if (retrievedUser != null) {
+            if (userDTO.getPassword().equals(retrievedUser.getPassword())) {
+                return "true";
+            }
+            // if (checkPassword(user.getPassword(), retrievedUser.getPassword())) {
+            //     return "true";
+            // }
+        }
+        return "false";
+    }
+}

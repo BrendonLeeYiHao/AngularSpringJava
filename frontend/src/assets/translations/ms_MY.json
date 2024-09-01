@@ -16,6 +16,7 @@
     "email_required_msg": "E-mel diperlukan!",
     "email_invalid_msg": "E-mel tidak sah!",
     "dob_required_msg": "Tarikh lahir diperlukan!",
+    "age_not_eighteen_msg": "Umur perlu sekurang-kurangnya 18 tahun ke atas!",
     "gender_required_msg": "Jantina diperlukan!",
     "success": "Berjaya",
     "error": "Salah",

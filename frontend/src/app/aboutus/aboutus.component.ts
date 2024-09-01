@@ -20,9 +20,10 @@ export class AboutusComponent implements OnInit{
   updatedForm!: FormGroup;
   response:any;
   passwordVisible = false;
+  errorMsg: any = {};
 
   ngOnInit(): void {
-      this.apiService.getAllUser().subscribe((res) => {
+      this.apiService.getAllUserDTO().subscribe((res) => {
         this.userList = res;
         this.initializeForm();
       })
@@ -96,23 +97,27 @@ export class AboutusComponent implements OnInit{
         gender: this.updatedForm.value.gender
       };
 
-      this.apiService.updateUser(updatedUser).subscribe((res) =>{
-        this.response = res.message;
-        if(this.response) {
-          Swal.fire({
-            title: this.translationService.translates('success'), 
-            text: this.translationService.translates('update_successfully'), 
-            icon: "success",
-            confirmButtonText: this.translationService.translates('ok')
-          });    
-          this.userList = this.userList.map(
-            user => user.id === this.updatedForm.value.id ? {
-              ...user, ...updatedUser
-            } : user
-          );
-          this.isVisible = false;
-          this.initializeForm();
-        }
+      this.apiService.updateUserDTO(updatedUser).subscribe(
+        (res) =>{
+          this.response = res.message;
+          if(this.response) {
+            Swal.fire({
+              title: this.translationService.translates('success'), 
+              text: this.translationService.translates('update_successfully'), 
+              icon: "success",
+              confirmButtonText: this.translationService.translates('ok')
+            });    
+            this.userList = this.userList.map(
+              user => user.id === this.updatedForm.value.id ? {
+                ...user, ...updatedUser
+              } : user
+            );
+            this.isVisible = false;
+            this.initializeForm();
+          }
+      },
+      err => {
+        this.errorMsg = err.error;
       })
     }
     else{

@@ -34,7 +34,7 @@ public class UserControllerTest {
 
         // Given
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        Date dob = sdf.parse("2024-06-06");
+        Date dob = sdf.parse("2000-06-06");
         User user = new User("Helen", "abcde123", "hardy@gmail.com", dob , "Male");
 
         // When
@@ -66,7 +66,7 @@ public class UserControllerTest {
 
         // Given
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-            Date dob = sdf.parse("2024-06-06");
+            Date dob = sdf.parse("2000-06-06");
             User user = new User(192, "Hardie", "abcde123", "hardy@gmail.com", dob , "Male");
 
         // When

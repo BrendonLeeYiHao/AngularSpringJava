@@ -15,7 +15,7 @@
     <form nz-form [formGroup]="registerForm" (ngSubmit)="register()" style="margin:auto;">
         <nz-form-item>
             <nz-form-label nzRequired [nzMd]="4" [nzSm]="24">{{ 'name' | translate }}</nz-form-label>
-            <nz-form-control nzHasFeedback [nzErrorTip]="nameErrorTpl">
+            <nz-form-control [nzErrorTip]="nameErrorTpl">
                 <input nz-input formControlName="name" placeholder="Vincent Lim">
                 <ng-template #nameErrorTpl let-control>
                     <ng-container *ngIf="control.hasError('required')">{{ 'name_required_msg' | translate }}</ng-container>
@@ -24,12 +24,13 @@
                     </ng-container>
                     <ng-container *ngIf="control.hasError('uniqueName')">{{ 'unique_name_msg' | translate }}</ng-container>
                 </ng-template>
+                <span *ngIf="errorMsg.name" style="color: red" [innerHTML]="errorMsg.name | translate "></span>
             </nz-form-control>
         </nz-form-item>
         <br>
         <nz-form-item>
             <nz-form-label nzRequired [nzMd]="4" [nzSm]="24">{{ 'password' | translate }}</nz-form-label>
-            <nz-form-control nzHasFeedback [nzErrorTip]="passwordErrorTpl">
+            <nz-form-control [nzErrorTip]="passwordErrorTpl">
                 <nz-input-group [nzSuffix]="suffixTemplate">
                     <input [type]="passwordVisible ? 'text': 'password'" nz-input formControlName="password" placeholder="Aab@cd12">
                 </nz-input-group>
@@ -39,12 +40,13 @@
                 <ng-template #passwordErrorTpl let-control>
                     <ng-container *ngIf="control.hasError('required')">{{ 'password_required_msg' | translate }}</ng-container>
                 </ng-template>
+                <span *ngIf="errorMsg.password" style="color: red" [innerHTML]="errorMsg.password | translate "></span>
             </nz-form-control>
         </nz-form-item>
         <br>
         <nz-form-item>
             <nz-form-label nzRequired [nzMd]="4" [nzSm]="24">{{ 'email' | translate }}</nz-form-label>
-            <nz-form-control nzHasFeedback [nzErrorTip]="emailErrorTpl">
+            <nz-form-control [nzErrorTip]="emailErrorTpl">
                 <input nz-input formControlName="email" placeholder="vincentlim@gmail.com">
                 <ng-template #emailErrorTpl let-control>
                     <ng-container *ngIf="control.hasError('required')">{{ 'email_required_msg' | translate }}</ng-container>
@@ -52,23 +54,26 @@
                         {{ 'email_invalid_msg' | translate }}
                     </ng-container>
                 </ng-template>
+                <span *ngIf="errorMsg.email" style="color: red" [innerHTML]="errorMsg.email | translate"></span>
             </nz-form-control>
         </nz-form-item>
         <br>
         <nz-form-item>
             <nz-form-label nzRequired [nzMd]="4" [nzSm]="24">{{ 'date_of_birth' | translate }}</nz-form-label>
-            <nz-form-control nzHasFeedback nzErrorTip="{{ 'dob_required_msg' | translate }}">
+            <nz-form-control nzErrorTip="{{ 'dob_required_msg' | translate }}">
                 <nz-date-picker formControlName="dob" nzPlaceHolder="{{ 'select_date' | translate }}" style="width:100%" [nzDisabledDate]="disabledDate" [nzDefaultPickerValue]="showDate"></nz-date-picker>
+                <span *ngIf="errorMsg.dob" style="color: red" [innerHTML]="errorMsg.dob | translate"></span>
             </nz-form-control>
         </nz-form-item>
         <br>
         <nz-form-item>
             <nz-form-label nzRequired [nzMd]="4" [nzSm]="24">{{ 'gender' | translate }}</nz-form-label>
-            <nz-form-control nzHasFeedback nzErrorTip="{{ 'gender_required_msg' | translate }}">
+            <nz-form-control nzErrorTip="{{ 'gender_required_msg' | translate }}">
                 <nz-select formControlName="gender" nzPlaceHolder="{{ 'select_gender' | translate }}">
                     <nz-option nzLabel="Male" nzValue="Male"></nz-option>
                     <nz-option nzLabel="Female" nzValue="Female"></nz-option>
                 </nz-select>
+                <span *ngIf="errorMsg.gender" style="color: red" [innerHTML]="errorMsg.gender | translate"></span>
             </nz-form-control>
         </nz-form-item>
         <nz-form-item class="register-area">

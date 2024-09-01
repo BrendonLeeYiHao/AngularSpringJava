@@ -31,7 +31,7 @@ public class UserServiceTest {
 
     @Test
     public void testCreateUser() throws Exception {
-        User user = new User("Minji", "aabbcc123", "minji@gmail.com", new SimpleDateFormat("yyyy-MM-dd").parse("2024-06-06"), "Female");
+        User user = new User("Minji", "aabbcc123", "minji@gmail.com", new SimpleDateFormat("yyyy-MM-dd").parse("2000-06-06"), "Female");
 
         String expectedResult = "Register Successfully!";
 
