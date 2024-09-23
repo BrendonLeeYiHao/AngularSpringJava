@@ -1,0 +1,34 @@
+<div style="margin: auto; max-width: 800px; margin-top: 50px">
+    <form nz-form [formGroup]="uploadForm" enctype="multipart/form-data">
+        <nz-form-item>
+            <nz-form-label nzRequired [nzMd]="6" [nzSm]="24">Image File</nz-form-label>
+            <nz-form-control nzErrorTip="No File Chosen!">
+                <input nz-input type="file" name="file" accept="image/png" class="nz-form-control" formControlName="uploadImage" (change)="onChange($event)">
+                <img [src]="selectedImage" alt="Selected Image" *ngIf="selectedImage" style="max-width:240px;max-height:200px; padding-top:10px">
+                <span *ngIf="fileSizeError" style="color:red;">File size exceeds maximum limit of 2 MB.</span>
+            </nz-form-control>
+        </nz-form-item>
+        <button nz-button nzType="primary" style="float:right" (click)="upload()">Confirm</button>
+    </form>
+</div>
+
+<div style="padding-top:100px; margin: auto; max-width: 800px">
+    <nz-table #basicTable [nzPageSize]="10" [nzScroll]="{ y: '800px' }" [nzData]="imageList">
+        <thead>
+            <tr>
+                <th nzWidth="80px">ID</th>
+                <th nzWidth="200px">Name</th>
+                <th nzWidth="200px">Image</th>
+                <th nzWidth="100px">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of basicTable.data">
+                <td>{{ item.id }}</td>
+                <td>{{ item.name }}</td>
+                <td><img *ngIf="item.image" [src]="item.image" width="150" height="150" /></td>
+                <td><button nz-button nzType="primary" nzDanger (click)="deleteFile(item.id)">Delete</button></td>
+            </tr>
+        </tbody>
+    </nz-table>
+</div>
