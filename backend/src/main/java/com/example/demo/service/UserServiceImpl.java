@@ -3,12 +3,16 @@ package com.example.demo.service;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +22,7 @@ import com.example.demo.exception.UserAlreadyExistsException;
 import com.example.demo.exception.UserNotFoundException;
 import com.example.demo.model.User;
 import com.example.demo.repository.UserRepository;
+// import com.example.demo.response.AuthResponse;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -26,6 +31,9 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private JWTService jwtService;
 
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
@@ -64,11 +72,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public String deleteUser(Integer id) {
         User existingUser = getProfileById(id);
-        if (existingUser != null) {
-            userRepository.deleteById(id);
-            return "Delete Successfully!";
+        if (existingUser == null) {
+            throw new UserNotFoundException("User with ID " + id + " not found.");     
         }
-        return null;
+        userRepository.deleteById(id);
+        return "Delete Successfully!";
     }
 
     @Override
@@ -133,28 +141,27 @@ public class UserServiceImpl implements UserService {
         if (existingUser == null) {
             throw new UserNotFoundException("User with ID " + userDTO.getId() + " not found.");
         }
-        if (existingUser.getId() == userDTO.getId() && 
-        existingUser.getName() == userDTO.getName() &&
-        existingUser.getDob() == userDTO.getDob() && 
-        existingUser.getGender() == userDTO.getGender()) {
-            userRepository.save(convertToEntity(userDTO));
-            return "Update Successfully!";  
-        } else {
-            throw new Error("Only password and email are modifiable!");
-        }  
+        existingUser.setPassword(userDTO.getPassword());
+        existingUser.setEmail(userDTO.getEmail());
+        userRepository.save(existingUser);
+        return "Update Successfully!";
     }
 
     @Override
-    public String login(UserDTO userDTO) {
+    public Map<String, String> login(UserDTO userDTO) {
         User retrievedUser = userRepository.findByName(userDTO.getName());
         if (retrievedUser != null) {
             if (userDTO.getPassword().equals(retrievedUser.getPassword())) {
-                return "true";
+                String token = jwtService.generateToken(userDTO.getName());
+                Map<String, String> userMap = new HashMap<>();
+                userMap.put("user", retrievedUser.getName());
+                userMap.put("token", token);
+                return userMap;
             }
             // if (checkPassword(user.getPassword(), retrievedUser.getPassword())) {
             //     return "true";
             // }
         }
-        return "false";
+        throw new BadCredentialsException("Invalid username or password");
     }
 }

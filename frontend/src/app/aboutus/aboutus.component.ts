@@ -23,9 +23,14 @@ export class AboutusComponent implements OnInit{
   errorMsg: any = {};
 
   ngOnInit(): void {
-      this.apiService.getAllUserDTO().subscribe((res) => {
-        this.userList = res;
-        this.initializeForm();
+      this.apiService.getAllUserDTO().subscribe({
+        next: (res) => {
+          this.userList = res.data;
+          this.initializeForm();
+        },
+        error: (error) => {
+          console.log(error);
+        }
       })
   }
 

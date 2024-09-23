@@ -5,4 +5,3 @@ public class AgeNotEighteenException extends RuntimeException {
         super(message);
     }
 }
-

@@ -1,24 +1,30 @@
 import { Component, OnInit } from '@angular/core';
-import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
-import { User } from './model/userModel';
-import { DatePipe } from '@angular/common';
 import { ApiService } from './api.service';
 import Swal from 'sweetalert2';
 import { TranslationService } from './translation.service';
+import { AuthService } from './auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   
-  constructor(private translationService: TranslationService) {}
+  constructor(private translationService: TranslationService, private apiService: ApiService, public authService: AuthService, private router: Router) {}
 
-  isLogin: boolean = false
+  ngOnInit(): void {
+    this.authService.validateToken();
+  }
 
   switchLanguage(lang: string) {
     this.translationService.setLanguage(lang);
+    const formData = new FormData();
+    formData.append('language', lang);
+    this.apiService.setLanguage(formData).subscribe(res => {
+      console.log(res.message);
+    })
   }
 
   toggleMenu() {
@@ -28,5 +34,14 @@ export class AppComponent {
     } else {
       menu!.classList.add("hidden");
     }
+  }
+
+  logout() {
+    this.authService.logout();
+  }
+
+  mobileLogOut() {
+    this.toggleMenu();
+    this.logout();
   }
 }

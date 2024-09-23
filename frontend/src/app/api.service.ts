@@ -10,6 +10,7 @@ export class ApiService {
 
   private SERVER_URL = "http://localhost:8080"
   // private SERVER_URL = "https://javaspringbackend.azurewebsites.net"
+  // private SERVER_URL = "https://localhost:7277"
 
   constructor(private httpClient: HttpClient) { }
 
@@ -53,5 +54,32 @@ export class ApiService {
 
   public loginDTO(user: User): Observable<any> {
     return this.httpClient.post(this.SERVER_URL + "/user/login-dto", user);
+  }
+
+  public setLanguage(formData: any): Observable<any> {
+    return this.httpClient.put(this.SERVER_URL + "/language/locale", formData);
+  }
+  // public loginDTO(loginRequest: any): Observable<any> {
+  //   return this.httpClient.post(this.SERVER_URL + "/api/login", loginRequest);
+  // }
+
+  public uploadFile(formData: any): Observable<any> {
+    return this.httpClient.post(this.SERVER_URL + "/file/upload", formData);
+  }
+
+  public getFile(id: number): Observable<Blob> {
+    return this.httpClient.get(`${this.SERVER_URL}/file/get-file/${id}`, { responseType: 'blob'});
+  }
+
+  public getAllFiles(): Observable<any> {
+    return this.httpClient.get(`${this.SERVER_URL}/file/get-files`)
+  }
+
+  public deleteFile(id: number): Observable<any> {
+    return this.httpClient.delete(`${this.SERVER_URL}/file/delete/${id}`);
+  }
+
+  public validateToken(formData: any): Observable<any> {
+    return this.httpClient.post(this.SERVER_URL + "/user/validate-token", formData);
   }
 }

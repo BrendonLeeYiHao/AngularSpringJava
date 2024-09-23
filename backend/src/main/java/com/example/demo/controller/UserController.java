@@ -2,6 +2,8 @@ package com.example.demo.controller;
 
 import com.example.demo.dto.UserDTO;
 import com.example.demo.model.User;
+import com.example.demo.response.SuccessResponse;
+import com.example.demo.service.JWTService;
 import com.example.demo.service.UserService;
 
 import jakarta.validation.Valid;
@@ -23,6 +25,9 @@ public class UserController {
 
     @Autowired 
     private UserService userService;
+
+    @Autowired
+    private JWTService jwtService;
 
     private final Map<String, String> responseMap = new HashMap<>();
 
@@ -62,36 +67,37 @@ public class UserController {
 
     // With DTO
     @PostMapping(value = "/register-dto", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Map<String, String>> createUserDTO(@Valid @RequestBody UserDTO userDTO) {
+    public ResponseEntity<SuccessResponse<Void>> createUserDTO(@Valid @RequestBody UserDTO userDTO) {
         String response = userService.createUser(userDTO);
-        responseMap.put("message", response);
-        return ResponseEntity.ok().body(responseMap);
+        return ResponseEntity.ok(new SuccessResponse<>(null, response));
     }
 
     @GetMapping(value = "/get-details-dto")
-    public ResponseEntity<List<UserDTO>> getAllUserDTO() {
+    public ResponseEntity<SuccessResponse<List<UserDTO>>> getAllUserDTO() {
         List<UserDTO> allUser = userService.getAllUserDTO();
-        return ResponseEntity.ok().body(allUser);
+        return ResponseEntity.ok(new SuccessResponse<>(allUser, "Success"));
     }
 
     @PutMapping(value = "/update-dto", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Map<String, String>> updateProfileDTO(@Valid @RequestBody UserDTO userDTO) {
+    public ResponseEntity<SuccessResponse<Void>> updateProfileDTO(@Valid @RequestBody UserDTO userDTO) {
         String response = userService.updateProfile(userDTO);
-        responseMap.put("message", response);
-        return ResponseEntity.ok().body(responseMap);
+        return ResponseEntity.ok(new SuccessResponse<>(null, response));
     }
 
     @PostMapping(value = "/login-dto", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Map<String, String>> login(@RequestBody UserDTO userDTO) {
-        String response = userService.login(userDTO);
-        responseMap.put("message", response);
-        return ResponseEntity.ok().body(responseMap);
+    public ResponseEntity<SuccessResponse<Map<String, String>>> login(@RequestBody UserDTO userDTO) {
+        Map<String, String> response = userService.login(userDTO);
+        return ResponseEntity.ok(new SuccessResponse<>(response, "Success"));
     }
 
     @DeleteMapping(value = "/delete/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Map<String, String>> deleteProfile(@PathVariable("id") Integer id) {
+    public ResponseEntity<SuccessResponse<Void>> deleteProfile(@PathVariable("id") Integer id) {
         String response = userService.deleteUser(id);
-        responseMap.put("message", response);
-        return ResponseEntity.ok().body(responseMap);
+        return ResponseEntity.ok(new SuccessResponse<>(null, response));
+    }
+
+    @PostMapping(value = "/validate-token", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<SuccessResponse<Boolean>> validateToken(@RequestParam(value = "token") String token) {
+        return ResponseEntity.ok(new SuccessResponse<>(jwtService.validateToken(token), "Success"));
     }
 }

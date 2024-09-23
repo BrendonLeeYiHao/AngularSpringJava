@@ -38,7 +38,7 @@ export class HomeComponent {
 
   ngOnInit(): void {
     this.apiService.getAllUserDTO().subscribe((res) => {
-      this.userList = res;
+      this.userList = res.data;
       this.existingNameList = this.userList.map(user => user.name);
     })
     const today = new Date();
@@ -87,11 +87,11 @@ export class HomeComponent {
         gender: this.registerForm.value.gender
       }
 
-      this.apiService.registerDTO(newUser).subscribe(
-        (res) => {
+      this.apiService.registerDTO(newUser).subscribe({
+        next: (res) => {
           this.response = res.message;
-          if(this.response) {
-            Swal.fire({
+          if (this.response) {
+              Swal.fire({
               title: this.translationService.translates("success"),
               text: this.translationService.translates("register_successfully"),
               icon: 'success',
@@ -101,9 +101,14 @@ export class HomeComponent {
             this.registerForm.reset();
           }
         },
-        err => {
-          this.errorMsg = err.error;
-        })
+        error: (err) => {
+          this.errorMsg = err.error.error;
+          // console.log(err);
+          // For ASP.NET
+          // this.errorMsg = err.error.errors;
+          // in HTML, need to use toString() as given is array
+        }
+      })
     }
     else {
       Object.values(this.registerForm.controls).forEach(control => {
@@ -127,55 +132,4 @@ export class HomeComponent {
     const minDate = new Date(today.getFullYear() - 18, today.getMonth(), today.getDate() + 1);
     return current.getTime() > minDate.getTime();
   }
-
-  // searchById() {
-  //   if(this.searchInput != null) {
-  //     this.apiService.getUserById(this.searchInput).subscribe((res) => {
-  //       console.log(res);
-  //       this.userProfile = res;
-  //       this.registerForm.controls['name'].setValue(this.userProfile.name);
-  //       this.registerForm.controls['password'].setValue(this.userProfile.password);
-  //       this.registerForm.controls['email'].setValue(this.userProfile.email);
-  //       const retrievedDate = this.datePipe.transform(this.userProfile.dob, 'yyyy-MM-dd');
-  //       this.registerForm.controls['dob'].setValue(retrievedDate);
-  //       this.registerForm.controls['gender'].setValue(this.userProfile.gender);
-  //     })
-  //   }
-  // }
-
-  // updateProfile() {
-  //   if(this.registerForm.valid) {
-  //     const updatedUser: User = {
-  //       id: this.userProfile.id,
-  //       name: this.registerForm.value.name,
-  //       password: this.registerForm.value.password,
-  //       email: this.registerForm.value.email,
-  //       dob: this.datePipe.transform(this.registerForm.value.dob, 'yyyy-MM-dd'),
-  //       gender: this.registerForm.value.gender
-  //     }
-
-  //     this.apiService.updateUser(updatedUser).subscribe((res) => {
-  //       this.response = res.message;
-  //       Swal.fire("Success", this.response, "success");
-  //     })
-  //   } else {
-  //     Object.values(this.registerForm.controls).forEach(control => {
-  //       if (control.invalid) {
-  //         control.markAsDirty();
-  //         control.updateValueAndValidity({ onlySelf: true });
-  //         Swal.fire("Error","Please fill up the fields correctly!","error");
-  //       }
-  //     }); 
-  //   }
-  // }
-
-  // deleteProfile() {
-  //   if(this.searchInput != null) {
-  //     this.apiService.deleteUser(this.searchInput).subscribe((res) => {
-  //       this.response = res.message;
-  //       Swal.fire("Success", this.response, "success");
-  //       this.registerForm.reset();
-  //     })
-  //   }
-  // }
 }

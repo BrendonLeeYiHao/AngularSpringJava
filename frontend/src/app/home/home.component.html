@@ -3,15 +3,6 @@
         {{ 'registration' | translate }}
     </h1>
     <div style="padding:20px 10px">
-        <!-- <div nz-row nzAlign="middle">
-            <div nz-col nzSpan="22">
-              <input nz-input [(ngModel)]="searchInput" placeholder="Enter id to search ...">
-            </div>
-            <div nz-col nzSpan="2">
-              <button nz-button nzType="primary" style="float:right" (click)="searchById()">{{ 'search' | translate }}</button>
-            </div>
-        </div> -->
-          <!-- <br> -->
     <form nz-form [formGroup]="registerForm" (ngSubmit)="register()" style="margin:auto;">
         <nz-form-item>
             <nz-form-label nzRequired [nzMd]="4" [nzSm]="24">{{ 'name' | translate }}</nz-form-label>
