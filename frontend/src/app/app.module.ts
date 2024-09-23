@@ -15,6 +15,7 @@ import { HomeComponent } from './home/home.component';
 import { GeminichatComponent } from './geminichat/geminichat.component';
 import { AboutusComponent } from './aboutus/aboutus.component';
 import { LoginComponent } from './login/login.component';
+import { FileuploadComponent } from './fileupload/fileupload.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/translations/', '.json');
@@ -26,7 +27,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     HomeComponent,
     GeminichatComponent,
     AboutusComponent,
-    LoginComponent
+    LoginComponent,
+    FileuploadComponent
   ],
   imports: [
     BrowserModule,
