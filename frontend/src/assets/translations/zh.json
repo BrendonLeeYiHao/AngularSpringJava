@@ -51,5 +51,8 @@
     "select_gender": "选择性别",
     "select_date": "选择日期",
     "type_to_search": "输入搜索",
-    "please_fill_up_the_fields_correctly": "请正确填写字段"
+    "please_fill_up_the_fields_correctly": "请正确填写字段",
+    "session_token_expired": "会话令牌已过期。请重新登录！",
+    "warning": "警告",
+    "file_uploaded_successfully": "文件上传成功！"
 }

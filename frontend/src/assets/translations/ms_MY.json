@@ -51,5 +51,8 @@
     "select_gender": "Pilih jantina",
     "select_date": "Pilih tarikh",
     "type_to_search": "Taip untuk carian",
-    "please_fill_up_the_fields_correctly": "Sila isikan ruangan dengan betul"
+    "please_fill_up_the_fields_correctly": "Sila isikan ruangan dengan betul",
+    "session_token_expired": "Token sesi telah tamat tempoh. Sila log masuk semula!",
+    "warning": "Amaran",
+    "file_uploaded_successfully": "Fail dimuat naik dengan berjaya!"
 }

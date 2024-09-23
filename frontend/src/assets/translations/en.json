@@ -51,5 +51,8 @@
     "select_gender": "Select gender",
     "select_date": "Select date",
     "type_to_search": "Type to search",
-    "please_fill_up_the_fields_correctly": "Please fill up the fields correctly"
+    "please_fill_up_the_fields_correctly": "Please fill up the fields correctly",
+    "session_token_expired": "Session token has expired. Kindly login again!",
+    "warning": "Warning",
+    "file_uploaded_successfully": "File Uploaded Successfully!"
 }
