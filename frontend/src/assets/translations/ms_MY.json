@@ -36,6 +36,7 @@
     "language": "Bahasa",
     "login": "Log masuk",
     "log_in": "Log masuk",
+    "logout": "Log Keluar",
     "or": "atau",
     "register_now": "Daftar sekarang!",
     "unique_name_msg": "Nama sudah wujud. Sila pilih yang lain!",
@@ -54,5 +55,11 @@
     "please_fill_up_the_fields_correctly": "Sila isikan ruangan dengan betul",
     "session_token_expired": "Token sesi telah tamat tempoh. Sila log masuk semula!",
     "warning": "Amaran",
-    "file_uploaded_successfully": "Fail dimuat naik dengan berjaya!"
+    "file_uploaded_successfully": "Fail dimuat naik dengan berjaya!",
+    "file_size_exceeded": "Saiz fail melebihi had maksimum 2 MB",
+    "no_file_chosen": "Tiada fail dipilih",
+    "upload": "Muat Naik",
+    "file": "Fail",
+    "image_file": "Fail imej",
+    "image": "Imej"
 }

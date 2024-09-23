@@ -36,6 +36,7 @@
     "language": "Language",
     "login": "Login",
     "log_in": "Log in",
+    "logout": "Logout",
     "or": "Or",
     "register_now": "register now!",
     "unique_name_msg": "Name has already existed. Please choose another one!",
@@ -54,5 +55,11 @@
     "please_fill_up_the_fields_correctly": "Please fill up the fields correctly",
     "session_token_expired": "Session token has expired. Kindly login again!",
     "warning": "Warning",
-    "file_uploaded_successfully": "File Uploaded Successfully!"
+    "file_uploaded_successfully": "File Uploaded Successfully!",
+    "file_size_exceeded": "File size exceeds maximum limit of 2 MB",
+    "no_file_chosen": "No file chosen",
+    "upload": "Upload",
+    "file": "File",
+    "image_file": "Image file",
+    "image": "Image"
 }

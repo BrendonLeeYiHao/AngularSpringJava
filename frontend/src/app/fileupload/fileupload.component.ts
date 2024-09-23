@@ -55,7 +55,6 @@ export class FileuploadComponent implements OnInit {
     if(this.uploadForm.valid) {
       const formData = new FormData();
       formData.append('file', this.image);
-      console.log(formData);
       this.apiService.uploadFile(formData).subscribe({
         next: (res) => {
           this.response = res.data;

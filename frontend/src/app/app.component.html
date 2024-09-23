@@ -10,14 +10,14 @@
                         <div class="ml-10 flex items-center justify-center space-x-5">
                             <a routerLink="/home" routerLinkActive="active" class="text-black-300 hover:bg-gray-700 hover:text-white rounded-md px-4 py-2 text-base font-medium" aria-current="page">{{ 'home' | translate }}</a>
                             <a routerLink="/about-us" routerLinkActive="active" class="text-black-300 hover:bg-gray-700 hover:text-white rounded-md px-4 py-2 text-base font-medium text-center">{{ 'user' | translate }}</a>
-                            <a routerLink="/file" routerLinkActive="active" class="text-black-300 hover:bg-gray-700 hover:text-white rounded-md px-4 py-2 text-base font-medium text-center">File</a>
+                            <a routerLink="/file" routerLinkActive="active" class="text-black-300 hover:bg-gray-700 hover:text-white rounded-md px-4 py-2 text-base font-medium text-center">{{ 'file' | translate }}</a>
                             <a routerLink="/gemini" routerLinkActive="active" class="hover:bg-gray-700 hover:text-white rounded-md px-4 py-2 text-base font-medium" style="color:goldenrod">{{ 'gemini_chatbot' | translate }}</a>
                         </div>
                     </div>
                 </div>
                 <div class="hidden lg:block">
                     <button *ngIf="(authService.currentToken$ | async) === null" routerLink="/login" routerLinkActive="active" class="text-black-300 hover:bg-gray-700 hover:text-white font-medium px-7 py-2" style="background-color: rgb(76, 218, 80);border-radius:30px">{{ 'login' | translate }}</button>
-                    <button *ngIf="authService.currentToken$ | async" class="text-black-300 hover:bg-gray-700 hover:text-white font-medium px-7 py-2" style="background-color: rgb(231, 92, 67);border-radius:30px" (click)="logout()">Logout</button>
+                    <button *ngIf="authService.currentToken$ | async" class="text-black-300 hover:bg-gray-700 hover:text-white font-medium px-7 py-2" style="background-color: rgb(231, 92, 67);border-radius:30px" (click)="logout()">{{ 'logout' | translate }}</button>
                     <button nz-dropdown [nzDropdownMenu]="menu" [nzPlacement]="'bottomRight'" class="text-black-300 hover:bg-gray-700 hover:text-white font-medium px-7 py-2" style="background-color: rgb(170, 185, 171);border-radius:30px; margin-left: 10px">{{ 'language' | translate }}</button>
                     <div class="ml-4 flex items-center md:ml-6">
                         <!-- Dropdown -->
@@ -53,10 +53,10 @@
             <div class="space-y-1 px-2 pb-3 pt-2 sm:px-3">
                 <a routerLink="/home" routerLinkActive="active" (click)="toggleMenu()" class="text-black-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">{{ 'home' | translate }}</a>
                 <a routerLink="/about-us" routerLinkActive="active" (click)="toggleMenu()" class="text-black-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">{{ 'user' | translate }}</a>
-                <a routerLink="/file" routerLinkActive="active" (click)="toggleMenu()" class="hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">File</a>
+                <a routerLink="/file" routerLinkActive="active" (click)="toggleMenu()" class="hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">{{ 'file' | translate }}</a>
                 <a routerLink="/gemini" routerLinkActive="active" (click)="toggleMenu()" class="hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium" style="color:goldenrod">{{ 'gemini_chatbot' | translate }}</a>
                 <a *ngIf="(authService.currentToken$ | async) === null" routerLink="/login" routerLinkActive="active" (click)="toggleMenu()" class="text-black-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">{{ 'login' | translate }}</a>
-                <a *ngIf="authService.currentToken$ | async" (click)="mobileLogOut()" class="text-black-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">Logout</a>
+                <a *ngIf="authService.currentToken$ | async" (click)="mobileLogOut()" class="text-black-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">{{ 'logout' | translate }}</a>
             </div>
             <div class="border-t border-gray-700 pb-3 pt-4">
                 <div class="space-y-1 px-2 sm:px-3">

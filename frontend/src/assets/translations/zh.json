@@ -36,6 +36,7 @@
     "language": "语言",
     "login": "登录",
     "log_in": "登录",
+    "logout": "注销",
     "or": "或者",
     "register_now": "立即注册！",
     "unique_name_msg": "名称已存在。请另选一个！",
@@ -54,5 +55,11 @@
     "please_fill_up_the_fields_correctly": "请正确填写字段",
     "session_token_expired": "会话令牌已过期。请重新登录！",
     "warning": "警告",
-    "file_uploaded_successfully": "文件上传成功！"
+    "file_uploaded_successfully": "文件上传成功！",
+    "file_size_exceeded": "文件大小超过最大限制 2 MB",
+    "no_file_chosen": "未选择文件",
+    "upload": "上传",
+    "file": "文件",
+    "image_file": "图像文件",
+    "image": "图像"
 }
