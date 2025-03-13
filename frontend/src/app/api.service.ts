@@ -8,8 +8,8 @@ import { User } from './model/userModel';
 })
 export class ApiService {
 
-  private SERVER_URL = "http://localhost:8080"
-  // private SERVER_URL = "https://javaspringbackend.azurewebsites.net"
+  // private SERVER_URL = "http://localhost:8080"
+  private SERVER_URL = "https://javaspringbackend.azurewebsites.net"
   // private SERVER_URL = "https://localhost:7277"
 
   constructor(private httpClient: HttpClient) { }
