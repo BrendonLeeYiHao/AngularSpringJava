@@ -12,12 +12,12 @@ export class GeminichatService {
   private messageHistory: BehaviorSubject<any> = new BehaviorSubject(null);
 
   constructor() {
-    this.generativeAi = new GoogleGenerativeAI('AIzaSyBCEdtPnTXDIf1Gz87Tw44vtLGsT38rA9U');    // Replaced with your own GEMINI Key
+    this.generativeAi = new GoogleGenerativeAI('AIzaSyBTAc6TAgvbLWoHKi0vfsf0txtx-x80QDQ');
   }
 
   async generateText(prompt: string) {
     try {
-      const model = this.generativeAi.getGenerativeModel({ model: 'gemini-pro'});
+      const model = this.generativeAi.getGenerativeModel({ model: 'gemini-2.0-flash'});
       this.messageHistory.next({
         from: 'user',
         message: prompt
